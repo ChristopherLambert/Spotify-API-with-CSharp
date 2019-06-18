@@ -23,7 +23,7 @@ Contem 4 Controllers
 
 2.CashController (Apenas Get dos valores da teabela de cash)
 
-3.Disco Controler(Apenas Get com filtro pra trazer DISCOS casdastrados na base)
+3.DiscoController(Apenas Get com filtro pra trazer DISCOS casdastrados na base)
 
 
 Filtras por IS,Categoria ou Todos.
