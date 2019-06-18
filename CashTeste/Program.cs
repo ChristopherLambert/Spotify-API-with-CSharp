@@ -20,8 +20,10 @@ namespace CashTeste
 				var services = scope.ServiceProvider;
 				try
 				{
-					var context = services.GetRequiredService<Domain.AppContext>();
-					AppInitializer.Initialize(context);
+					using (var context = services.GetRequiredService<Domain.AppContext>())
+					{
+						AppInitializer.Initialize(context);
+					}
 				}
 				catch (Exception ex)
 				{

@@ -1,7 +1,6 @@
 ﻿using CashTeste.DTO;
 using CashTeste.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using SpotifyAPI.Web.Models;
 using System.Threading.Tasks;
 
 namespace CashTeste.Controllers
@@ -13,7 +12,7 @@ namespace CashTeste.Controllers
 		[HttpGet]
 		public async Task<ActionResult<object>> Get([FromQuery]FiltroSpoty filtro)
 		{
-			await SpotyRest.StartCredentialsAuth();
+			SpotyRest.StartCredentialsAuth();
 
 			if (filtro.SpotyFiltro == EnumSpoty.Categorias)
 			{

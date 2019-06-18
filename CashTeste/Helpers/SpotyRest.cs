@@ -14,10 +14,10 @@ namespace CashTeste.Helpers
 		private static AuthorizationCodeAuth auth = null;
 		private static SpotifyWebAPI api = null;
 
-		public static async Task StartCredentialsAuth()
+		public static void StartCredentialsAuth()
 		{
 			CredentialsAuth auth = new CredentialsAuth(_clientId, _secretId);
-			Token token = await auth.GetToken();
+			Token token = auth.GetToken().Result;
 			api = new SpotifyWebAPI() { TokenType = token.TokenType, AccessToken = token.AccessToken };
 		}
 
@@ -50,10 +50,18 @@ namespace CashTeste.Helpers
 			return tracks;
 		}
 
-		public static CategoryPlaylist GetPlaylist(string idCategoria = null)
+		public static CategoryPlaylist GetPlaylist(string idCategoria = null, bool isPopular = false, string country = "BR")
 		{
-			var playlist = api.GetCategoryPlaylists(idCategoria);
-			return playlist;
+			if (!isPopular)
+			{
+				var playlist = api.GetCategoryPlaylists(idCategoria);
+				return playlist;
+			}
+			else
+			{
+				var playlist = api.GetCategoryPlaylists(idCategoria, country, 200);
+				return playlist;
+			}
 		}
 	}
 }

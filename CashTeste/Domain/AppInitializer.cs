@@ -1,8 +1,9 @@
-﻿using CashTeste.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
+using CashTeste.Helpers;
+using CashTeste.Model;
 
 namespace CashTeste.Domain
 {
@@ -12,13 +13,11 @@ namespace CashTeste.Domain
 		{
 			context.Database.EnsureCreated();
 
-			// Look for any students.
-			if (context.CashValores.Any())
-			{
-				return;  // DB has been seeded
-			}
+			if (!context.CashValores.Any())
+				SetCashValores(context);
 
-			SetCashValores(context);
+			if (!context.Discos.Any())
+				SetDiscos(context);
 		}
 
 		private static void SetCashValores(AppContext context)
@@ -61,6 +60,151 @@ namespace CashTeste.Domain
 			foreach (CashValores cv in cashValores)
 			{
 				context.CashValores.Add(cv);
+			}
+
+			context.SaveChanges();
+		}
+
+		private static void SetDiscos(AppContext context)
+		{
+			var discos = new List<Discos>();
+
+			SpotyRest.StartCredentialsAuth();
+			var playListBR = SpotyRest.GetPlaylist("pop", true, "BR");
+			var playListEU = SpotyRest.GetPlaylist("pop", true, "AR");
+
+			foreach (var play in playListBR.Playlists.Items)
+			{
+				if (discos.Count == 50) break;
+
+				discos.Add(new Discos()
+				{
+					Nome = play.Name,
+					Genero = "POP",
+					Valor = new Random().Next(10, 100)
+				});
+			}
+
+			foreach (var play in playListEU.Playlists.Items)
+			{
+				if (discos.Count == 50) break;
+
+				discos.Add(new Discos()
+				{
+					Nome = play.Name,
+					Genero = "POP",
+					Valor = new Random().Next(10, 100)
+				});
+			}
+
+			foreach (Discos disco in discos)
+			{
+				context.Discos.Add(disco);
+			}
+
+			context.SaveChanges();
+
+			discos.Clear();
+		    playListBR = SpotyRest.GetPlaylist("jazz", true, "BR");
+			playListEU = SpotyRest.GetPlaylist("jazz", true, "AR");
+
+			foreach (var play in playListBR.Playlists.Items)
+			{
+				if (discos.Count == 50) break;
+
+				discos.Add(new Discos()
+				{
+					Nome = play.Name,
+					Genero = "MPB",
+					Valor = new Random().Next(10, 100)
+				});
+			}
+
+			foreach (var play in playListEU.Playlists.Items)
+			{
+				if (discos.Count == 50) break;
+
+				discos.Add(new Discos()
+				{
+					Nome = play.Name,
+					Genero = "MPB",
+					Valor = new Random().Next(10, 100)
+				});
+			}
+
+			foreach (Discos disco in discos)
+			{
+				context.Discos.Add(disco);
+			}
+
+			context.SaveChanges();
+
+			discos.Clear();
+			playListBR = SpotyRest.GetPlaylist("classical", true, "BR");
+			playListEU = SpotyRest.GetPlaylist("classical", true, "AR");
+
+			foreach (var play in playListBR.Playlists.Items)
+			{
+				if (discos.Count == 50) break;
+
+				discos.Add(new Discos()
+				{
+					Nome = play.Name,
+					Genero = "CLASSIC",
+					Valor = new Random().Next(10, 100)
+				});
+			}
+
+			foreach (var play in playListEU.Playlists.Items)
+			{
+				if (discos.Count == 50) break;
+
+				discos.Add(new Discos()
+				{
+					Nome = play.Name,
+					Genero = "CLASSIC",
+					Valor = new Random().Next(10, 100)
+				});
+			}
+
+			foreach (Discos disco in discos)
+			{
+				context.Discos.Add(disco);
+			}
+
+			context.SaveChanges();
+
+			discos.Clear();
+			playListBR = SpotyRest.GetPlaylist("rock", true, "BR");
+			playListEU = SpotyRest.GetPlaylist("rock", true, "AR");
+
+			foreach (var play in playListBR.Playlists.Items)
+			{
+				if (discos.Count == 50) break;
+
+				discos.Add(new Discos()
+				{
+					Nome = play.Name,
+					Genero = "ROCK",
+					Valor = new Random().Next(10, 100)
+				});
+			}
+
+			foreach (var play in playListEU.Playlists.Items)
+			{
+				if (discos.Count == 50) break;
+
+				discos.Add(new Discos()
+				{
+					Nome = play.Name,
+					Genero = "ROCK",
+					Valor = new Random().Next(10, 100)
+				});
+			}
+
+			foreach (Discos disco in discos)
+			{
+				context.Discos.Add(disco);
 			}
 
 			context.SaveChanges();
