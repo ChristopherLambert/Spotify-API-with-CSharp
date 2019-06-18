@@ -26,7 +26,7 @@ Contem 4 Controllers
 3.DiscoController(Apenas Get com filtro pra trazer DISCOS casdastrados na base)
 
 
-Filtras por IS,Categoria ou Todos.
+Filtrar por ID,Categoria ou Todos.
 
 4.VendasController(Get e Post para trazer e registrar novas vendas)
 
