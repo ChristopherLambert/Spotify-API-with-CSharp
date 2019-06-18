@@ -18,20 +18,26 @@ Você pode testar diretamente no swagger ou em qualquer ferramenta de REST de su
 Quando a aplicação começar ele automaticamente abrira a pagina do Swagger no seu navegador.
 
 Contem 4 Controllers 
+
 1.SpotyTestController (Apenas um Get para testar a comunicação com SpotifyAPI)
+
 2.CashController (Apenas Get dos valores da teabela de cash)
+
 3.Disco Controler(Apenas Get com filtro pra trazer DISCOS casdastrados na base)
+
 
 Filtras por IS,Categoria ou Todos.
 
 4.VendasController(Get e Post para trazer e registrar novas vendas)
 
 GET
+
 Filtro Paginado por todos, ou por data de venda no padrão brasileiro --> '15/06/2019' 
 Se não passar a pagina nem o numeo de paginas ele traz a primeira pagina com tamanho 10 por padrão.
 
 Filtrar por ID.
 
 POST
+
 Recebe uma lista de IDs do disco que serão vendidos, a data da venda ee sempre a data atual.
 Retorna uma lista de disco vendidos conforme id, e o cashback total.
